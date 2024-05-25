@@ -1,4 +1,4 @@
-,ID,Time,Symptoms,Severity,Start_Date,End_Date
+Unnamed: 0,ID,Time,Symptoms,Severity,Start_Date,End_Date
 Cramps,Yue ,20:13:31,Cramps,9,2024-05-01,2024-05-03
 Bloating,Yue ,20:13:31,Bloating,2,2024-05-01,2024-05-03
 Mastalgia,Yue ,20:13:31,Mastalgia,3,2024-05-01,2024-05-03
@@ -9,3 +9,13 @@ Dizziness,Yue ,20:13:31,Dizziness,2,2024-05-01,2024-05-03
 Fatigue,Yue ,20:13:31,Fatigue,3,2024-05-01,2024-05-03
 Vomiting,Yue ,20:13:31,Vomiting,2,2024-05-01,2024-05-03
 Nausea,Yue ,20:13:31,Nausea,2,2024-05-01,2024-05-03
+,Sue,20:52:55,Cramps,2,2024-04-03,2024-04-06
+,Sue,20:52:55,Bloating,2,2024-04-03,2024-04-06
+,Sue,20:52:55,Mastalgia,3,2024-04-03,2024-04-06
+,Sue,20:52:55,Headaches,5,2024-04-03,2024-04-06
+,Sue,20:52:55,Diarrhoea,2,2024-04-03,2024-04-06
+,Sue,20:52:55,Loss of appetite,4,2024-04-03,2024-04-06
+,Sue,20:52:55,Dizziness,3,2024-04-03,2024-04-06
+,Sue,20:52:55,Fatigue,1,2024-04-03,2024-04-06
+,Sue,20:52:55,Vomiting,1,2024-04-03,2024-04-06
+,Sue,20:52:55,Nausea,3,2024-04-03,2024-04-06
