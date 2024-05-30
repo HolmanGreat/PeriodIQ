@@ -1,4 +1,4 @@
-,ID,Time,Symptoms,Severity,Start_Date,End_Date
+Unnamed: 0,ID,Time,Symptoms,Severity,Start_Date,End_Date
 Cramps,Maia,08:15:49,Cramps,3,2024-05-02,2024-05-05
 Bloating,Maia,08:15:49,Bloating,4,2024-05-02,2024-05-05
 Mastalgia,Maia,08:15:49,Mastalgia,1,2024-05-02,2024-05-05
@@ -9,3 +9,13 @@ Dizziness,Maia,08:15:49,Dizziness,1,2024-05-02,2024-05-05
 Fatigue,Maia,08:15:49,Fatigue,1,2024-05-02,2024-05-05
 Vomiting,Maia,08:15:49,Vomiting,1,2024-05-02,2024-05-05
 Nausea,Maia,08:15:49,Nausea,1,2024-05-02,2024-05-05
+Cramps,Maia,08:18:04,Cramps,7,2024-06-06,2024-06-09
+Bloating,Maia,08:18:04,Bloating,1,2024-06-06,2024-06-09
+Mastalgia,Maia,08:18:04,Mastalgia,3,2024-06-06,2024-06-09
+Headaches,Maia,08:18:04,Headaches,1,2024-06-06,2024-06-09
+Diarrhoea,Maia,08:18:04,Diarrhoea,1,2024-06-06,2024-06-09
+Loss of appetite,Maia,08:18:04,Loss of appetite,2,2024-06-06,2024-06-09
+Dizziness,Maia,08:18:04,Dizziness,3,2024-06-06,2024-06-09
+Fatigue,Maia,08:18:04,Fatigue,2,2024-06-06,2024-06-09
+Vomiting,Maia,08:18:04,Vomiting,2,2024-06-06,2024-06-09
+Nausea,Maia,08:18:04,Nausea,3,2024-06-06,2024-06-09
