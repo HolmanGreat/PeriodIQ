@@ -7,13 +7,13 @@ from github import Github
 import io
 
 # Set up your GitHub credentials (Replace with your actual credentials)
-GITHUB_TOKEN = {"authorization":st.secrets['TOKEN'], "content-type": "application/json"}
+header = {"authorization":st.secrets['TOKEN'], "Accept": "application/vnd.github+json"}
 REPO_NAME = 'HolmanGreat/PeriodIQ'
 FOLDER_NAME = 'Polka'
 FILE_NAME = 'symptoms.csv'
 
 # Authenticate to GitHub
-g = Github(GITHUB_TOKEN)
+g = Github(TOKEN)
 repo = g.get_repo(REPO_NAME)
 
 def upload_to_github(file_name, new_content, repo, folder_name):
