@@ -7,7 +7,7 @@ from github import Github
 import io
 
 # Set up your GitHub credentials (Replace with your actual credentials)
-GITHUB_TOKEN = {"authorization":st.secrets['GIT_TOKEN'], "content-type": "application/json"}
+GITHUB_TOKEN = {"authorization":st.secrets['TOKEN'], "content-type": "application/json"}
 REPO_NAME = 'HolmanGreat/PeriodIQ'
 FOLDER_NAME = 'Polka'
 FILE_NAME = 'symptoms.csv'
