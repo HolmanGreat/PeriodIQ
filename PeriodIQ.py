@@ -17,7 +17,7 @@ import io
 #st.secrets["OpenAI_key"] == "your OpenAI key"
 #"sally" in st.secrets.whitelist
 #GiTok = st.secrets["database"]["user"] == 
-GiTok = st.secrets.database.TOKEN
+GiTok = st.secrets.database.token
 
 
 
