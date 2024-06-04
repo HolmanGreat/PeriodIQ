@@ -7,13 +7,28 @@ from github import Github
 import io
 
 # Set up your GitHub credentials (Replace with your actual credentials)
-headers = {"authorization":st.secrets['TOKEN'], "Accept": "application/vnd.github+json"}
+#headers = {"authorization":st.secrets['TOKEN'], "Accept": "application/vnd.github+json"}
+
+
+#[database]
+#user = "your username"
+#password = "your password"
+
+#st.secrets["OpenAI_key"] == "your OpenAI key"
+#"sally" in st.secrets.whitelist
+#GiTok = st.secrets["database"]["user"] == 
+GiTok = st.secrets.database.TOKEN
+
+
+
+
+
 REPO_NAME = 'HolmanGreat/PeriodIQ'
 FOLDER_NAME = 'Polka'
 FILE_NAME = 'symptoms.csv'
 
 # Authenticate to GitHub
-g = Github(headers)
+g = Github(GiTok)
 repo = g.get_repo(REPO_NAME)
 
 def upload_to_github(file_name, new_content, repo, folder_name):
