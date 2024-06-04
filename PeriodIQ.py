@@ -13,7 +13,7 @@ FOLDER_NAME = 'Polka'
 FILE_NAME = 'symptoms.csv'
 
 # Authenticate to GitHub
-g = Github(TOKEN)
+g = Github(headers)
 repo = g.get_repo(REPO_NAME)
 
 def upload_to_github(file_name, new_content, repo, folder_name):
