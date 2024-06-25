@@ -1,6 +1,6 @@
 #Importing dependencies
 
-%%writefile pilot.py
+
 
 import streamlit as st
 import altair as alt
@@ -264,7 +264,7 @@ def main():
             elif app == "🧭 Metrics":
                 st.title("🧭 Metrics")
                 st.divider()
-                st.image("/content/calc.png")
+                st.image("calc.png")
                 csv_content = get_csv_content_from_github(repo, FOLDER_NAME, FILE_NAME)
                 if csv_content:
                     df = pd.read_csv(io.StringIO(csv_content))
@@ -310,7 +310,7 @@ def main():
 
             elif app == "💊 Drug Tab":
                 st.write("")
-                st.image("/content/drug tab(pink).jpeg", caption="Keep tabs with period pills")
+                st.image("drug tab(pink).jpeg", caption="Keep tabs with period pills")
                 st.write("")
                 drug_name = st.text_input("Drug Name")
                 date = st.date_input("Enter date")
@@ -339,7 +339,7 @@ def main():
 
             elif app == "🔒 QAuth Token":
                 st.title("🔒 QAuth Token")
-                st.image("/content/QAuth.jpg", caption= "©image: Designed by Freepik")
+                st.image("QAuth.jpg", caption= "©image: Designed by Freepik")
 
                 if st.button("Generate Token"):
                     token = generate_password()
