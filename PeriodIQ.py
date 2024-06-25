@@ -111,7 +111,7 @@ def create_symptom_chart(metrics_df, symptom):
 
 # Initialize Firebase only once
 if not firebase_admin._apps:
-    cred = credentials.Certificate("/content/periodiq_3A.json")
+    cred = credentials.Certificate("periodiq_3A.json")
     firebase_admin.initialize_app(cred)
 
 
