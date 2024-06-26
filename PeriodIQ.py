@@ -268,7 +268,7 @@ def main():
                 csv_content = get_csv_content_from_github(repo, FOLDER_NAME, FILE_NAME)
                 if csv_content:
                     df = pd.read_csv(io.StringIO(csv_content))
-                    st.success("", icon="✅")
+                    st.success("")
                 else:
                     st.error("Failed to retrieve content.")
 
@@ -309,7 +309,8 @@ def main():
                     st.write("✨")
 
             elif app == "💊 Drug Tab":
-                st.write("")
+                st.title("💊 Drug Tab")
+                st.divider()
                 st.image("drug tab(pink).jpeg", caption="Keep tabs with period pills")
                 st.write("")
                 drug_name = st.text_input("Drug Name")
