@@ -127,7 +127,7 @@ def login(email, password):
         st.session_state.useremail = user.email
         st.session_state.authenticated = True
     except:
-        st.warning("Login Failed")
+        st.warning("Incorrect username/password")
 
 def logout():
     st.session_state.authenticated = False
@@ -335,7 +335,7 @@ def main():
                     st.success("", icon="✅")
                     st.write(df)
                 else:
-                    st.warning("No content available or failed to load content")
+                    st.warning("Waiting to call up drug tabs")
 
             elif app == "🔒 QAuth Token":
                 st.title("🔒 QAuth Token")
@@ -376,7 +376,7 @@ def main():
             qauth = st.text_input("Enter QAuth Token", type="password")
 
             st.divider()
-            st.caption(":warning: _If you encounter issues gaining access kindly ask your partner for a valid QAuth Token to enable access_")
+            st.caption(":warning: _If you encounter any issue gaining access, kindly ask your partner for a valid QAuth Token to enable access_")
 
             if st.button("Access Metrics"):
                 if authenticate(user_id, qauth):
