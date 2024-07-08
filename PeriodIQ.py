@@ -28,9 +28,11 @@ g = Github(GITHUB_TOKEN)
 repo = g.get_repo(REPO_NAME)
 
 
+# MongoDB access
+db_access = st.secrets.mongo_db_key.conn_str
 
 # Instantiate client
-client =  MongoClient("")
+client =  MongoClient(db_access)
                 
 # Create DB
 db = client["DB"]
