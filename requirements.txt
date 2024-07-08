@@ -1,3 +1,3 @@
 streamlit
 PyGithub
-firebase_admin
+pymongo
