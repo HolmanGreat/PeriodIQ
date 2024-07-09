@@ -370,7 +370,7 @@ def landing_page():
        }
 
         df = pd.DataFrame(data_dict, index=symptoms)
-        st.write(df)
+        
 
         @st.cache_data
         def convert_df(df):
