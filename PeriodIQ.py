@@ -380,7 +380,7 @@ def landing_page():
 
         if st.button("Save To Journal"):
             upload_status = upload_to_github(FILE_NAME, csv, repo, FOLDER_NAME)
-            st.write(upload_status)
+            st.success("Journal updated")
         else:
             st.write("Not Saved")
 
