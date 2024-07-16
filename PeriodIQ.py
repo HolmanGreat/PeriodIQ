@@ -62,6 +62,7 @@ def top_symptoms():
     st.title("PeriodIQ")
     st.write(f"Welcome, {st.session_state.username}!")
     st.divider()
+    st.image("checklist.jpeg")
     st.write("Enter your 10 prominent menstrual symptoms")
     symptoms = st.text_input(label="E.g: Cramps, Nausea, Fatigue...")
     if st.button("Save"):
@@ -362,6 +363,7 @@ def landing_page():
     if app == "📝 Journals":
         st.title("📝 Journals")
         st.divider()
+        st.image("calendar_blue.jpeg")
         st.caption(":octagonal_sign: _Using the slider below, scale your pre-menstrual/menstrual symptoms_")
         st.caption("0 = No symptom", "|  10 = Excruciatingly severe")
         st.caption("On a scale of 1-10")
@@ -422,7 +424,7 @@ def landing_page():
     elif app == "🧭 Metrics":
         st.title("🧭 Metrics")
         st.divider()
-        st.image("metrics.png")
+        st.image("chart.jpeg")
         csv_content = get_csv_content_from_github(repo, FOLDER_NAME, FILE_NAME)
         if csv_content:
             df = pd.read_csv(io.StringIO(csv_content))
@@ -503,7 +505,7 @@ def landing_page():
     elif app == "🔒 QAuth Token":
         st.title("🔒 QAuth Token")
         st.divider()
-        st.image("QAuth.jpg", caption= "©image: Designed by Freepik")
+        st.image("lock.jpeg", caption= "©image: Designed by Freepik")
 
         if st.button("Generate Token"):
             token = generate_password()
