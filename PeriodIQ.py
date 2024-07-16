@@ -542,6 +542,7 @@ def main():
 
     if not st.session_state.logged_in:
         st.markdown("<h1 style='text-align: center;'>PeriodIQ</h1>", unsafe_allow_html=True)
+        st.write("")
         login_signup_page()
     elif st.session_state.need_to_enter_symptoms:
         top_symptoms()
