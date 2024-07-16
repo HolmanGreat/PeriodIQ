@@ -365,13 +365,13 @@ def landing_page():
         st.divider()
         st.image("calendar_blue.jpeg")
         st.caption(":octagonal_sign: _Using the slider below, scale your pre-menstrual/menstrual symptoms_")
-        st.caption("0 = No symptom", "|  10 = Excruciatingly severe")
+        st.caption("0 = No symptom  ||  10 = Excruciatingly severe")
         st.caption("On a scale of 1-10")
 
         username = st.session_state.username
 
-        start_date = st.date_input("Start of period", value=None)
-        end_date = st.date_input("End of period", value=None)
+        start_date = st.date_input("Period begins", value=None)
+        end_date = st.date_input("Period ends", value=None)
         current_time = datetime.now().strftime("%H:%M:%S")
 
         symptom_db = symptom_collection.find_one({"ID": username})
@@ -424,11 +424,11 @@ def landing_page():
     elif app == "🧭 Metrics":
         st.title("🧭 Metrics")
         st.divider()
-        st.image("chart.jpeg")
+        st.image("chart.jpeg", caption = "Your period metrics at a glance")
         csv_content = get_csv_content_from_github(repo, FOLDER_NAME, FILE_NAME)
         if csv_content:
             df = pd.read_csv(io.StringIO(csv_content))
-            st.success("", icon = "✅")
+            st.success("")
         else:
             st.error("Failed to retrieve content.")
 
@@ -474,8 +474,8 @@ def landing_page():
         st.divider()
         st.image("drug tab(pink).jpeg", caption = "Keep tabs with period pills")
         st.write("")
-        drug_name  = st.text_input("Drug Name")
-        date = st.date_input("Enter date")
+        drug_name  = st.text_input("Period Pills")
+        date = st.date_input("Date used")
         username = f"{st.session_state.username}"
         drug_dict = {"ID":[username],"Date":[date],"Pill":[drug_name]}
         drug_df = pd.DataFrame(drug_dict)
@@ -500,12 +500,12 @@ def landing_page():
             st.write(df)
 
         else:
-            st.warning("No content available or failed to load content")
+            st.warning("No period pill(s) have been added to your drug tab")
 
     elif app == "🔒 QAuth Token":
-        st.title("🔒 QAuth Token")
+        st.title("QAuth Token")
         st.divider()
-        st.image("lock.jpeg", caption= "©image: Designed by Freepik")
+        st.image("lock.jpeg")
 
         if st.button("Generate Token"):
             token = generate_password()
@@ -526,7 +526,9 @@ def landing_page():
 
             st.success("Token generated")
         st.divider()
-        st.caption(":octagonal_sign: _Share period metrics with your partner by generating a QAuth Token to enable them access. ❗Remember to copy and save the generated token, as leaving this page will make the token no longer visible_")
+        st.caption(":octagonal_sign: _Share period metrics with your partner by generating a QAuth Token to enable them access_")
+        st.write("")
+        st.caption(":warning: Remember to copy and save the generated token, as leaving this page will make the token no longer visible")
 
     elif app == "❌ Log Out":
         st.session_state.logged_in = False
