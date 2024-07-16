@@ -37,10 +37,72 @@ client =  MongoClient(db_access)
 # Create DB
 db = client["DB"]
 
-# Create Collection(Data Table)
+# Create Collections (Data Table | Symptom_Variables)
 collection = db["Data_Table"]
+symptom_collection = db["Symptom_Variables"]
 
 
+
+
+# Initialize session state for symptoms_list and metrics_data
+if 'symptoms_list' not in st.session_state:
+    st.session_state.symptoms_list = []
+if 'metrics_data' not in st.session_state:
+    st.session_state.metrics_data = {}
+if 'username' not in st.session_state:
+    st.session_state.username = ""
+
+
+
+
+def top_symptoms():
+    """
+    10 prominent menstrual symptoms
+    """
+    st.title("PeriodIQ")
+    st.write(f"Welcome, {st.session_state.username}!")
+    st.divider()
+    st.write("Enter your 10 prominent menstrual symptoms")
+    symptoms = st.text_input(label="E.g: Cramps, Nausea, Fatigue...")
+    if st.button("Save"):
+        symptoms_add = [symptom.strip() for symptom in symptoms.split(",")]
+        if len(symptoms_add) <= 10:
+            st.session_state.symptoms_list = symptoms_add
+            period_symptoms = {"ID": st.session_state.username, "Period Symptoms": symptoms_add}
+            symptom_collection.insert_one(period_symptoms)
+            st.success("Saved")
+            st.session_state.need_to_enter_symptoms = False  # Update the state
+            st.rerun()  # Redirect to landing page
+        else:
+            st.error("Please enter only 10 symptoms")
+
+
+
+
+
+def metrics():
+    """
+    Generates a slider to enable user to grade period symptoms
+    """
+    for symptom in st.session_state.symptoms_list:
+        period_symptom_var = st.slider(symptom, 0, 10, 0, key=symptom)
+        st.session_state.metrics_data[symptom] = period_symptom_var
+
+
+def check_mongodb():
+    # Query DB for user symptoms using user ID
+    document = symptom_collection.find_one({"ID": st.session_state.username})
+
+    if document:
+        symptom_array = document.get('Period Symptoms')
+        if symptom_array:
+            #st.write(symptom_array)
+            landing_page()
+        else:
+            st.write("Symptoms not found")
+    else:
+        st.write("Please enter your 10 prominent period symptoms.")
+        top_symptoms()
 
 
 
@@ -99,7 +161,7 @@ def upload_to_github(file_name, new_content, repo, folder_name):
         repo.create_file(path, "Creating new file", new_content)
         return "File created"
 
-symptoms = ["Cramps", "Bloating", "Mastalgia", "Headaches", "Diarrhoea", "Loss of appetite", "Dizziness", "Fatigue", "Vomiting", "Nausea"]
+#symptoms = ["Cramps", "Bloating", "Mastalgia", "Headaches", "Diarrhoea", "Loss of appetite", "Dizziness", "Fatigue", "Vomiting", "Nausea"]
 
 
 
@@ -168,24 +230,8 @@ def validate_email(email):
     return False
 
 
-
-
-
-
-
-
-def main():
-    # Check if user is logged in
-    if 'logged_in' not in st.session_state:
-        st.session_state.logged_in = False
-
-    if not st.session_state.logged_in:
-        login_signup_page()
-    else:
-        landing_page()
-
 def login_signup_page():
-    tab1, tab2, tab3= st.tabs(["Login", "Sign-Up", "💕 Partner Console"])
+    tab1, tab2, tab3 = st.tabs(["Login", "Sign-Up", "💕 Partner Console"])
 
     with tab1:
         with st.form(key="Login", clear_on_submit=True):
@@ -197,7 +243,6 @@ def login_signup_page():
                 if not user or not passkey:
                     st.error("Enter both username and password")
                 else:
-                    # Query DB by username
                     user_details = collection.find_one({"Name": user, "Password": passkey})
                     if not user_details:
                         st.error("Invalid Username/Password")
@@ -205,6 +250,7 @@ def login_signup_page():
                         st.success("Login successful!")
                         st.session_state.logged_in = True
                         st.session_state.username = user
+                        st.session_state.need_to_enter_symptoms = False  # Reset state
                         st.rerun()
 
     with tab2:
@@ -224,17 +270,20 @@ def login_signup_page():
                 elif len(password) < 6:
                     st.error("Password must be at least 6 characters long.")
                 else:
-                    # Check if username or email already exists
                     if collection.find_one({"$or": [{"Name": username}, {"Email": email}]}):
                         st.error("Username or Email already exists.")
                     else:
-                        # Insert data to DB
                         data = {"Name": username, "Email": email, "Password": password}
                         added_doc = collection.insert_one(data)
                         st.success("Account Created")
                         st.session_state.logged_in = True
                         st.session_state.username = username
+                        st.session_state.need_to_enter_symptoms = True  # Set state to enter symptoms
                         st.rerun()
+
+
+
+
 
 
     with tab3:
@@ -307,70 +356,54 @@ def login_signup_page():
 
 
 def landing_page():
-    app = st.sidebar.selectbox("Menu",["🪐 Home", "📝 Journals","🧭 Metrics", "💊 Drug Tab","🔒 QAuth Token","❌ Log Out"])
-    if app == "🪐 Home":
-        st.title("PeriodIQ")
-        st.write(f"Welcome, {st.session_state.username}!")
-        st.divider()
-        pms_variables = st.multiselect("Select your 10 most prominent menstrual symptoms",
-        ["Cramps", "Drowsiness", "Light headedness", "Mastalgia", "Nausea", "Diarrhoea", "Mood swings", "Bloating", "Headaches", "Lethargic", "Vomiting", "Anorexia", "Hot flushes"])
+    app = st.sidebar.selectbox("Menu",["📝 Journals","🧭 Metrics", "💊 Drug Tab","🔒 QAuth Token","❌ Log Out"])
 
-    elif app == "📝 Journals":
+
+    if app == "📝 Journals":
         st.title("📝 Journals")
         st.divider()
-        st.write("Using the slider below, scale your pre-menstrual/menstrual symptoms")
-        st.write("0 = No symptom", "|  10 = Excruciatingly severe")
-        st.write("On a scale of 1-10")
+        st.caption(":octagonal_sign: _Using the slider below, scale your pre-menstrual/menstrual symptoms_")
+        st.caption("0 = No symptom", "|  10 = Excruciatingly severe")
+        st.caption("On a scale of 1-10")
 
-        # metrics_data
-        username = f"{st.session_state.username}"
-        metrics_data = []
+        username = st.session_state.username
+
         start_date = st.date_input("Start of period", value=None)
         end_date = st.date_input("End of period", value=None)
         current_time = datetime.now().strftime("%H:%M:%S")
 
-        pms_var1 = st.slider("Cramps", 0, 10, 0)
-        metrics_data.append(pms_var1)
+        symptom_db = symptom_collection.find_one({"ID": username})
 
-        pms_var2 = st.slider("Bloating", 0, 10, 0)
-        metrics_data.append(pms_var2)
+        if symptom_db:
+            period_symptoms = symptom_db.get('Period Symptoms', [])
 
-        pms_var3 = st.slider("Mastalgia", 0, 10, 0)
-        metrics_data.append(pms_var3)
+        else:
+            st.error("Please enter your 10 prominent period symptoms")
+            period_symptoms = []
 
-        pms_var4 = st.slider("Headaches", 0, 10, 0)
-        metrics_data.append(pms_var4)
+        if 'metrics_data' not in st.session_state:
+            st.session_state.metrics_data = {}
 
-        pms_var5 = st.slider("Diarrhoea", 0, 10, 0)
-        metrics_data.append(pms_var5)
-
-        pms_var6 = st.slider("Loss of appetite", 0, 10, 0)
-        metrics_data.append(pms_var6)
-
-        pms_var7 = st.slider("Dizziness", 0, 10, 0)
-        metrics_data.append(pms_var7)
-
-        pms_var8 = st.slider("Fatigue", 0, 10, 0)
-        metrics_data.append(pms_var8)
-
-        pms_var9 = st.slider("Vomiting", 0, 10, 0)
-        metrics_data.append(pms_var9)
-
-        pms_var10 = st.slider("Nausea", 0, 10, 0)
-        metrics_data.append(pms_var10)
+        for symptom in period_symptoms:
+            period_symptom_var = st.slider(symptom, 0, 10, 0, key=symptom)
+            st.session_state.metrics_data[symptom] = period_symptom_var
 
         data_dict = {
             "ID": username,
             "Time": current_time,
-            "Symptoms": symptoms,
-            "Severity": metrics_data,
+            "Symptoms": period_symptoms,
+            "Severity": list(st.session_state.metrics_data.values()),
             "Start_Date": start_date,
             "End_Date": end_date
+        }
 
-       }
 
-        df = pd.DataFrame(data_dict, index=symptoms)
-        
+
+
+
+
+        df = pd.DataFrame(data_dict, index=st.session_state.metrics_data)
+
 
         @st.cache_data
         def convert_df(df):
@@ -380,7 +413,7 @@ def landing_page():
 
         if st.button("Save To Journal"):
             upload_status = upload_to_github(FILE_NAME, csv, repo, FOLDER_NAME)
-            st.success("Journal updated")
+            st.write(upload_status)
         else:
             st.write("Not Saved")
 
@@ -389,7 +422,7 @@ def landing_page():
     elif app == "🧭 Metrics":
         st.title("🧭 Metrics")
         st.divider()
-        st.image("calc.png")
+        st.image("metrics.png")
         csv_content = get_csv_content_from_github(repo, FOLDER_NAME, FILE_NAME)
         if csv_content:
             df = pd.read_csv(io.StringIO(csv_content))
@@ -424,7 +457,7 @@ def landing_page():
                         )
                         st.altair_chart(chart, use_container_width=True)
                     else:
-                        st.image("/content/File not found.jpg", caption = "©image:Designed by Freepik")
+                        st.image("File not found.jpg", caption = "©image:Designed by Freepik")
                         st.write("No data found for the selected filters.")
                 else:
                     st.write("Click the button to check stats")
@@ -437,7 +470,7 @@ def landing_page():
     elif app == "💊 Drug Tab":
         st.title("💊 Drug Tab")
         st.divider()
-        st.image("drug tab(blue).jpeg", caption = "Keep tabs with period pills")
+        st.image("drug tab(pink).jpeg", caption = "Keep tabs with period pills")
         st.write("")
         drug_name  = st.text_input("Drug Name")
         date = st.date_input("Enter date")
@@ -497,10 +530,25 @@ def landing_page():
         st.session_state.logged_in = False
         st.experimental_rerun()
 
+def main():
+    if 'logged_in' not in st.session_state:
+        st.session_state.logged_in = False
+    if 'need_to_enter_symptoms' not in st.session_state:
+        st.session_state.need_to_enter_symptoms = False
 
+    if not st.session_state.logged_in:
+        login_signup_page()
+    elif st.session_state.need_to_enter_symptoms:
+        top_symptoms()
+    else:
+        landing_page()
 
 if __name__ == "__main__":
     main()
+
+
+
+
 
 
 
