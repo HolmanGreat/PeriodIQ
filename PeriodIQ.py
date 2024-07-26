@@ -236,7 +236,7 @@ def login_signup_page():
 
     with tab1:
         with st.form(key="Login", clear_on_submit=True):
-            st.subheader(":pink[Login]")
+            st.subheader("Login")
             user = st.text_input("Username")
             passkey = st.text_input("Password", type="password")
 
@@ -256,7 +256,7 @@ def login_signup_page():
 
     with tab2:
         with st.form(key="Sign Up", clear_on_submit=True):
-            st.subheader(":pink[Sign-Up]")
+            st.subheader("Sign-Up")
             username = st.text_input("Username")
             email = st.text_input("Email")
             password = st.text_input("Password", type="password")
@@ -541,10 +541,8 @@ def main():
         st.session_state.need_to_enter_symptoms = False
 
     if not st.session_state.logged_in:
-        #st.markdown("<h1 style='text-align: center;'>PeriodIQ</h1>", unsafe_allow_html=True)
+        
         st.markdown("<h1 style='text-align: center; color: #E607B5;'>PeriodIQ</h1>", unsafe_allow_html=True)
-        st.image("6.png")
-
         st.image("6.png")
         st.write("")
         login_signup_page()
