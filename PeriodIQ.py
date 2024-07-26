@@ -541,7 +541,10 @@ def main():
         st.session_state.need_to_enter_symptoms = False
 
     if not st.session_state.logged_in:
-        st.markdown("<h1 style='text-align: center;'>PeriodIQ</h1>", unsafe_allow_html=True)
+        #st.markdown("<h1 style='text-align: center;'>PeriodIQ</h1>", unsafe_allow_html=True)
+        st.markdown("<h1 style='text-align: center; color: #E607B50;'>PeriodIQ</h1>", unsafe_allow_html=True)
+        st.image("6.png")
+
         st.image("6.png")
         st.write("")
         login_signup_page()
