@@ -544,6 +544,7 @@ def main():
         st.markdown("<h1 style='text-align: center;'>PeriodIQ</h1>", unsafe_allow_html=True)
         st.write("")
         login_signup_page()
+        st.image("6.png")
     elif st.session_state.need_to_enter_symptoms:
         top_symptoms()
     else:
