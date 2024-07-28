@@ -473,70 +473,10 @@ def landing_page():
 
         else:
             st.write("✨")
-      
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
-        """if csv_content:
-            df = pd.read_csv(io.StringIO(csv_content))
-            st.success("")
-        else:
-            st.error("Failed to retrieve content.")
-
-        # Date inputs for start and end of period
-        start_date = st.date_input("Period Starts")
-        end_date = st.date_input("Period Ends")
-
-        if csv_content and start_date and end_date:
-            df["Start_Date"] = pd.to_datetime(df["Start_Date"], errors='coerce')
-            df["End_Date"] = pd.to_datetime(df["End_Date"], errors='coerce')
-            # Filter dates
-            selected_date = pd.date_range(start=start_date, end=end_date).tolist()
-            username = f"{st.session_state.username}"
-
-            def symptom_monthly_stats():
-                symptom = st.selectbox("Symptom", ["Cramps", "Bloating", "Mastalgia", "Headaches", "Diarrhoea", "Loss of appetite", "Dizziness", "Fatigue", "Vomiting", "Nausea"])
-                if st.button("Check Stats"):
-                    # Filter data frame based on User_ID, Symptoms & Date range
-                    monthly_symptom = df[(df["Symptoms"] == symptom) & (df["ID"] == username) & (df["Start_Date"].isin(selected_date))]
-                    if not monthly_symptom.empty:
-                        metrics_df = monthly_symptom[["Start_Date", "Severity"]]
-
-                        chart = alt.Chart(metrics_df).mark_bar().encode(
-                            x=alt.X('Start_Date:T', title='Date', axis=alt.Axis(labelAngle=90)),
-                            y=alt.Y('Severity:Q', title='Severity')
-                        ).properties(
-                            title=f"Metrics of {symptom}"
-                        )
-                        st.altair_chart(chart, use_container_width=True)
-                    else:
-                        st.image("File not found.jpg", caption = "©image:Designed by Freepik")
-                        st.write("No data found for the selected filters.")
-                else:
-                    st.write("Click the button to check stats")
-
-            symptom_monthly_stats()
-
-        else:
-            st.write("✨")
-            """
+  
 
     elif app == "💊 Drug Tab":
         st.title("💊 Drug Tab")
