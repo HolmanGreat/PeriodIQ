@@ -425,8 +425,62 @@ def landing_page():
         st.title("🧭 Metrics")
         st.divider()
         st.image("chart.jpeg", caption = "Your period metrics at a glance")
+        
         csv_content = get_csv_content_from_github(repo, FOLDER_NAME, FILE_NAME)
-        if csv_content:
+        df = pd.read_csv(io.StringIO(csv_content))
+        st.success("")
+        
+
+        # Date inputs for start and end of period
+        start_date = st.date_input("Start")
+        end_date = st.date_input("End")
+
+        if csv_content and start_date and end_date:
+            df["Start_Date"] = pd.to_datetime(df["Start_Date"], errors='coerce')
+            df["End_Date"] = pd.to_datetime(df["End_Date"], errors='coerce')
+            # Filter dates
+            selected_date = pd.date_range(start=start_date, end=end_date).tolist()
+            username = f"{st.session_state.username}"
+
+
+
+            if st.button("Check Stats"):
+                # Filter data frame based on User_ID, Symptoms & Date range
+                monthly_symptom = df[(df["Symptoms"] == symptom_to_plot) & (df["ID"] == username) & (df["Start_Date"].isin(selected_date))
+                chart = select_symptom_to_chart()
+                st.altair_chart(chart)
+            else:
+                #st.image("File not found.jpg", caption = "©image:Designed by Freepik")
+                st.write("No data found for the selected filters.")
+
+
+
+
+
+        else:
+            st.write("✨")
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+        """if csv_content:
             df = pd.read_csv(io.StringIO(csv_content))
             st.success("")
         else:
@@ -467,7 +521,7 @@ def landing_page():
             symptom_monthly_stats()
 
         else:
-            st.write("✨")
+            st.write("✨")"'"
 
     elif app == "💊 Drug Tab":
         st.title("💊 Drug Tab")
