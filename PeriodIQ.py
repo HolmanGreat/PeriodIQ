@@ -78,6 +78,19 @@ def top_symptoms():
             st.error("Please enter only 10 symptoms")
 
 
+symptom_to_plot = ""
+def select_symptom_to_chart():
+    syms_docs = symptom_collection.find_one({"ID": st.session_state.username})
+
+    if syms_docs:
+        symptom_array = syms_docs.get('Period Symptoms')
+        if symptom_array:
+            symptom_select = st.selectbox("Select Symptom", symptom_array)
+            global symptom_to_plot  # Use global keyword to modify the global variable
+            symptom_to_plot = symptom_select
+        else:
+            st.write("None")
+
 
 
 
@@ -447,7 +460,7 @@ def landing_page():
             if st.button("Check Stats"):
                 # Filter data frame based on User_ID, Symptoms & Date range
                 monthly_symptom = df[(df["Symptoms"] == symptom_to_plot) & (df["ID"] == username) & (df["Start_Date"].isin(selected_date))
-                chart = select_symptom_to_chart()
+                chart = select_symptom_to_chart(df, symptom_to_plot)
                 st.altair_chart(chart)
             else:
                 #st.image("File not found.jpg", caption = "©image:Designed by Freepik")
@@ -521,7 +534,8 @@ def landing_page():
             symptom_monthly_stats()
 
         else:
-            st.write("✨")"'"
+            st.write("✨")
+            """
 
     elif app == "💊 Drug Tab":
         st.title("💊 Drug Tab")
