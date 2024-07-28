@@ -542,7 +542,7 @@ def landing_page():
 
     elif app == "❌ Log Out":
         st.session_state.logged_in = False
-        #st.experimental_rerun()
+        st.rerun()
 
 def main():
     if 'logged_in' not in st.session_state:
@@ -552,7 +552,7 @@ def main():
 
     if not st.session_state.logged_in:
         
-        st.markdown("<h1 style='text-align: center; color: #E607B5;'>PeriodIQ</h1>", unsafe_allow_html=True)
+        #st.markdown("<h1 style='text-align: center; color: #E607B5;'>PeriodIQ</h1>", unsafe_allow_html=True)
         st.image("6.png")
         st.write("")
         login_signup_page()
