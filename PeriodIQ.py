@@ -175,7 +175,7 @@ def upload_to_github(file_name, new_content, repo, folder_name):
         repo.create_file(path, "Creating new file", new_content)
         return "File created"
 
-#symptoms = ["Cramps", "Bloating", "Mastalgia", "Headaches", "Diarrhoea", "Loss of appetite", "Dizziness", "Fatigue", "Vomiting", "Nausea"]
+
 
 
 
@@ -361,7 +361,7 @@ def login_signup_page():
 
             if st.button("❌Sign-Out"):
                 st.session_state.authenticate = False
-                st.experimental_rerun
+                st.experimentalrerun
 
 
 
@@ -542,7 +542,7 @@ def landing_page():
 
     elif app == "❌ Log Out":
         st.session_state.logged_in = False
-        st.experimental_rerun()
+        #st.experimental_rerun()
 
 def main():
     if 'logged_in' not in st.session_state:
