@@ -90,7 +90,7 @@ def select_symptom_to_chart():
             symptom_to_plot = symptom_select
         else:
             st.write("None")
-
+select_symptom_to_chart()
 
 
 
