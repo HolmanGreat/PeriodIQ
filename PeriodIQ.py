@@ -459,7 +459,7 @@ def landing_page():
 
             if st.button("Check Stats"):
                 # Filter data frame based on User_ID, Symptoms & Date range
-                monthly_symptom = df[(df["Symptoms"] == symptom_to_plot) & (df["ID"] == username) & (df["Start_Date"].isin(selected_date))
+                monthly_symptom = df[(df["Symptoms"] == symptom_to_plot) & (df["ID"] == username) & (df["Start_Date"].isin(selected_date))]
                 chart = select_symptom_to_chart(df, symptom_to_plot)
                 st.altair_chart(chart)
             else:
