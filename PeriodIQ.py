@@ -361,7 +361,7 @@ def login_signup_page():
 
             if st.button("❌Sign-Out"):
                 st.session_state.authenticate = False
-                st.experimentalrerun
+                st.rerun()
 
 
 
