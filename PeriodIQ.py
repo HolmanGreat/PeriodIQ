@@ -90,7 +90,7 @@ def select_symptom_to_chart():
             symptom_to_plot = symptom_select
         else:
             st.write("None")
-select_symptom_to_chart()
+
 
 
 
@@ -447,7 +447,8 @@ def landing_page():
         # Date inputs for start and end of period
         start_date = st.date_input("Start")
         end_date = st.date_input("End")
-
+        select_symptom_to_chart()
+        
         if csv_content and start_date and end_date:
             df["Start_Date"] = pd.to_datetime(df["Start_Date"], errors='coerce')
             df["End_Date"] = pd.to_datetime(df["End_Date"], errors='coerce')
