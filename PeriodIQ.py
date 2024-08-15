@@ -47,7 +47,7 @@ symptom_collection = db["Symptom_Variables"]
 
 
 # Setup HuggingFace Access
-HF_KEY = { "authorization":st.secrets["HF_TOKEN"], "content-type": "application/json"}
+HF_KEY = st.secrets.HF_ACCESS.HF_TOKEN
 
 
 # Instantiatie HuggingFace Model
