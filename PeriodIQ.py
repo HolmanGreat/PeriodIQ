@@ -47,13 +47,14 @@ symptom_collection = db["Symptom_Variables"]
 
 
 # Setup HuggingFace Access
-HF_TOKEN = st.secrets.HF_TOKEN
+HF_KEY = { "authorization":st.secrets["HF_TOKEN"], "content-type": "application/json"}
+
 
 # Instantiatie HuggingFace Model
 repo_id =  "mistralai/Mistral-7B-Instruct-v0.3" 
 llm = HuggingFaceEndpoint(repo_id = repo_id,
          max_length = 128, temperature = 0.5,
-          huggingfacehub_api_token = key)
+          huggingfacehub_api_token = HF_KEY)
 
 
 
