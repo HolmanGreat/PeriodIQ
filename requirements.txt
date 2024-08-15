@@ -1,3 +1,9 @@
 streamlit
 PyGithub
 pymongo
+langchain
+langchain_huggingface
+huggingface_hub
+transformers>=4.40.0
+accelerator
+
