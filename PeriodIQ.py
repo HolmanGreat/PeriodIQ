@@ -390,7 +390,7 @@ def login_signup_page():
 
 
 def landing_page():
-    app = st.sidebar.selectbox("Menu",["📝 Journals","🧭 Metrics", "💊 Drug Tab","🔒 QAuth Token","❌ Log Out"])
+    app = st.sidebar.selectbox("Menu",["📝 Journals","🧭 Metrics", "✨ Ask Kyma", "💊 Drug Tab","🔒 QAuth Token","❌ Log Out"])
 
 
     if app == "📝 Journals":
@@ -497,7 +497,50 @@ def landing_page():
 
 
 
+    elif app == "✨ Ask Kyma":
+        st.title("Kyma")
+        st.caption(":octagonal_sign: _Kyma provides information on healthcare for educational purposes. Always contact your healthcare provider for professional advice_")
+        
+        #Initialize chat history
+        if "messages" not in st.session_state:
+            st.session_state.messages = []
+
+        #Display Chat messages from history
+        for message in st.session_state.messages:
+            with st.chat_message(message["role"]):
+                st.markdown(message["content"])
+
+
+        #User Input
+        if user_question:= st.chat_input("✨ Ask Kyma"):
+            #Add user Input To Chat History
+            st.session_state.messages.append({"role":"user", "content":user_question})
+            #Display User Input In Chat Message Container
+            with st.chat_message("user"):
+                st.markdown(user_question)
+
+
+
+            #ChatBot's Response
+
+            #Display ChatBot's Response In Message Container
+            with st.chat_message("assistant"):
+                #Setup Callback Handler For streaming response
+                #st_callback = StreamlitCallbackHandler(st.container())
+
+                #Pass extracted_english_text to LLM
+                response_in_english = llm.invoke(user_question)
+
+
+                output_text=st.markdown(response_in_english)
+
+            #Add ChatBot's Response To Chat History
+            st.session_state.messages.append({"role":"assistant","content": output_text})
+
+
   
+
+
 
     elif app == "💊 Drug Tab":
         st.title("💊 Drug Tab")
