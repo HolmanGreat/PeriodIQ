@@ -12,6 +12,10 @@ from github import Github
 from pymongo import MongoClient
 
 
+from langchain_huggingface import HuggingFaceEndpoint
+from langchain import PromptTemplate, LLMChain
+import os
+
 
 #Github Acces
 GITHUB_TOKEN = st.secrets.database.GITHUB_TOKEN
@@ -40,6 +44,21 @@ db = client["DB"]
 # Create Collections (Data Table | Symptom_Variables)
 collection = db["Data_Table"]
 symptom_collection = db["Symptom_Variables"]
+
+
+# Setup HuggingFace Access
+HF_TOKEN = st.secrets.HF_TOKEN
+
+# Instantiatie HuggingFace Model
+repo_id =  "mistralai/Mistral-7B-Instruct-v0.3" 
+llm = HuggingFaceEndpoint(repo_id = repo_id,
+         max_length = 128, temperature = 0.5,
+          huggingfacehub_api_token = key)
+
+
+
+
+
 
 
 
