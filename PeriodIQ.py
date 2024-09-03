@@ -9,6 +9,7 @@ import streamlit as st
 
 from datetime import datetime
 from github import Github
+from googletrans import Translator
 from pymongo import MongoClient
 
 
@@ -495,7 +496,35 @@ def landing_page():
         else:
             st.write("✨")
 
+################
+from googletrans import Translator
 
+user_question = "Como estas?"
+
+try:
+    # Detecting language of user's query
+    translator = Translator()
+    user_text = user_question
+    detected_language = translator.detect(user_text)
+    default_lang_detected = detected_language.lang
+
+    # Translate user's question to English text
+    english_text = translator.translate(user_text, src=default_lang_detected, dest="en")
+    extracted_english_text = english_text.text
+
+    # Translate back to the original detected language
+    translate_back = translator.translate(extracted_english_text, src="en", dest=default_lang_detected)
+
+    print(f"Original text: {user_question}")
+    print(f"Detected language: {default_lang_detected}")
+    print(f"Translated to English: {extracted_english_text}")
+    print(f"Translated back to {default_lang_detected}: {translate_back.text}")
+except Exception as e:
+    print(f"An error occurred, please try again: {str(e)}")
+
+
+
+###################
 
     elif app == "✨ Ask Kyma":
         st.title("Kyma")
@@ -513,6 +542,7 @@ def landing_page():
 
         #User Input
         if user_question:= st.chat_input("✨ Ask Kyma"):
+            
             #Add user Input To Chat History
             st.session_state.messages.append({"role":"user", "content":user_question})
             #Display User Input In Chat Message Container
@@ -528,10 +558,26 @@ def landing_page():
                 #Setup Callback Handler For streaming response
                 #st_callback = StreamlitCallbackHandler(st.container())
 
+                #Detecting language of user's query
+                #Add user Input To Chat History
+                #try:
+                translator= Translator()
+                user_text = user_question
+              
+                #Detecting language of user's query
+                detected_language = translator.detect(user_text)
+                default_lang_detected = detected_language.lang
+
+                #Translate user's query into English for LLM
+                english_text = translator.translate(user_text, src = default_lang_detected, dest = "en")
+                extracted_english_text = english_text.text
+
+                
                 #Pass extracted_english_text to LLM
-                response_in_english = llm.invoke(user_question)
+                response_in_english = llm.invoke(extracted_english_text)
 
-
+                #Translate LLM's output into user's query language 
+                extracted_engli.                  
                 output_text=st.markdown(response_in_english)
 
             #Add ChatBot's Response To Chat History
@@ -564,7 +610,7 @@ def landing_page():
 
         pharma_csv_content = ""
         if st.button("View Tab"):
-            pharma_csv_content = get_csv_content_from_github(repo, FOLDER_NAME, FILE_NAME_2)
+            pharma_csv_content = get_csv_content_from_github(repo, FOLDER_NAMEFILE_NAME_2)
 
 
         if pharma_csv_content:
