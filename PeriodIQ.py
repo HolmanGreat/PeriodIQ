@@ -496,35 +496,7 @@ def landing_page():
         else:
             st.write("✨")
 
-################
-from googletrans import Translator
 
-user_question = "Como estas?"
-
-try:
-    # Detecting language of user's query
-    translator = Translator()
-    user_text = user_question
-    detected_language = translator.detect(user_text)
-    default_lang_detected = detected_language.lang
-
-    # Translate user's question to English text
-    english_text = translator.translate(user_text, src=default_lang_detected, dest="en")
-    extracted_english_text = english_text.text
-
-    # Translate back to the original detected language
-    translate_back = translator.translate(extracted_english_text, src="en", dest=default_lang_detected)
-
-    print(f"Original text: {user_question}")
-    print(f"Detected language: {default_lang_detected}")
-    print(f"Translated to English: {extracted_english_text}")
-    print(f"Translated back to {default_lang_detected}: {translate_back.text}")
-except Exception as e:
-    print(f"An error occurred, please try again: {str(e)}")
-
-
-
-###################
 
     elif app == "✨ Ask Kyma":
         st.title("Kyma")
@@ -577,8 +549,8 @@ except Exception as e:
                 response_in_english = llm.invoke(extracted_english_text)
 
                 #Translate LLM's output into user's query language 
-                extracted_engli.                  
-                output_text=st.markdown(response_in_english)
+                translate_back = translator.translate(extracted_english_text, src="en", dest=default_lang_detected)                 
+                output_text=st.markdown(translate_back)
 
             #Add ChatBot's Response To Chat History
             st.session_state.messages.append({"role":"assistant","content": output_text})
