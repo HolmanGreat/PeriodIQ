@@ -623,16 +623,18 @@ def landing_page():
 
 
     elif app == "🌏 About":
-        st.image("6.png",caption ="❤️AI-Driven Healthcare, Accessible and Affordable for Every Woman")
-        st.write("Every woman deserves access to quality healthcare, no matter where she lives. We're on a mission to make affordable, world-class care available to women across Africa and beyond. It's time to prioritize women's health, globally.")
+        st.image("6.png")
+        st.caption ("_❤️AI-Driven Healthcare, Accessible and Affordable for Every lady_")
+        st.write("Every lady deserves access to quality healthcare, no matter where she lives. We're on a mission to make affordable, world-class care available to women & girls across Africa and beyond. It's time to prioritize women's health, globally.")
         #st.image("purple.png", caption = "Empowering Women's Health with AI...Embark on a journey of informed decisions, better health, and well-being. Your health matters, and Thera is here to support you every step of the way.")
 
-        st.image("free-blank-map-asia_53876-145019.png", caption = "PeriodIQ✨...Powered by Gilcare💜")
+        st.image("free-blank-map-asia_53876-145019.png")
+        st.caption ("_...powered by💜 Gilcare_")
         st.write("Together, we can make women's health a priority, and ensure that every woman is empowered with the knowledge and resources she needs to thrive")
 
         st.markdown("""
         ---
-        🔗 We would like to hear from you (https://forms.gle/hWTy3pxmV7cAtWzYA)
+        🔗 We would love to hear your thoughts (https://forms.gle/hWTy3pxmV7cAtWzYA)
         """)
 
 
