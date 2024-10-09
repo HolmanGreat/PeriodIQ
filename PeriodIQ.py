@@ -623,16 +623,16 @@ def landing_page():
 
 
     elif app == "🌏 About":
-        st.image("Thera.png",caption ="#WomensHealth #AffordableCare #HealthcareForAll")
+        st.image("6.png",caption ="❤️AI-Driven Healthcare, Accessible and Affordable for Every Woman")
         st.write("Every woman deserves access to quality healthcare, no matter where she lives. We're on a mission to make affordable, world-class care available to women across Africa and beyond. It's time to prioritize women's health, globally.")
-        st.image("purple.png", caption = "Empowering Women's Health with AI...Embark on a journey of informed decisions, better health, and well-being. Your health matters, and Thera is here to support you every step of the way.")
+        #st.image("purple.png", caption = "Empowering Women's Health with AI...Embark on a journey of informed decisions, better health, and well-being. Your health matters, and Thera is here to support you every step of the way.")
 
-        st.image("serene.png", caption = "Together, we can make women's health a priority, and ensure that every woman is empowered with the knowledge and resources she needs to thrive.")
-        st.write("#WomensHealth #AffordableCare #HealthcareForAll")
+        st.image("", caption = "PeriodIQ✨...Powered by Gilcare💜")
+        st.write("Together, we can make women's health a priority, and ensure that every woman is empowered with the knowledge and resources she needs to thrive")
 
         st.markdown("""
         ---
-        We would like to hear from you 🌍 (https://forms.gle/8ZGhZ8Lkkcq43dyG7)
+        We would like to hear from you 🌍 (https://docs.google.com/forms/d/1tfwe6-jLgr3MlXt0onkdV9aTG0EELhffVuRieWXWO4A/edit?usp=forms_home&ths=true)
         """)
 
 
