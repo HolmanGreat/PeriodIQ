@@ -391,7 +391,7 @@ def login_signup_page():
 
 
 def landing_page():
-    app = st.sidebar.selectbox("Menu",["📝 Journals","🧭 Metrics", "✨ Ask Kyma", "💊 Drug Tab","🔒 QAuth Token","❌ Log Out"])
+    app = st.sidebar.selectbox("Menu",["📝 Journals","🧭 Metrics", "✨ Ask Kyma", "💊 Drug Tab","🔒 QAuth Token","🌏 About","❌ Log Out"])
 
 
     if app == "📝 Journals":
@@ -621,6 +621,22 @@ def landing_page():
         st.write("")
         st.caption(":warning: Remember to copy and save the generated token, as leaving this page will make the token no longer visible")
 
+
+    elif app == "🌏 About":
+        st.image("Thera.png",caption ="#WomensHealth #AffordableCare #HealthcareForAll")
+        st.write("Every woman deserves access to quality healthcare, no matter where she lives. We're on a mission to make affordable, world-class care available to women across Africa and beyond. It's time to prioritize women's health, globally.")
+        st.image("purple.png", caption = "Empowering Women's Health with AI...Embark on a journey of informed decisions, better health, and well-being. Your health matters, and Thera is here to support you every step of the way.")
+
+        st.image("serene.png", caption = "Together, we can make women's health a priority, and ensure that every woman is empowered with the knowledge and resources she needs to thrive.")
+        st.write("#WomensHealth #AffordableCare #HealthcareForAll")
+
+        st.markdown("""
+        ---
+        We would like to hear from you 🌍 (https://forms.gle/8ZGhZ8Lkkcq43dyG7)
+        """)
+
+
+    
     elif app == "❌ Log Out":
         st.session_state.logged_in = False
         st.rerun()
