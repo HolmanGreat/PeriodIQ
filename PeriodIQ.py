@@ -627,12 +627,12 @@ def landing_page():
         st.write("Every woman deserves access to quality healthcare, no matter where she lives. We're on a mission to make affordable, world-class care available to women across Africa and beyond. It's time to prioritize women's health, globally.")
         #st.image("purple.png", caption = "Empowering Women's Health with AI...Embark on a journey of informed decisions, better health, and well-being. Your health matters, and Thera is here to support you every step of the way.")
 
-        st.image("", caption = "PeriodIQ✨...Powered by Gilcare💜")
+        st.image("free-blank-map-asia_53876-145019.png", caption = "PeriodIQ✨...Powered by Gilcare💜")
         st.write("Together, we can make women's health a priority, and ensure that every woman is empowered with the knowledge and resources she needs to thrive")
 
         st.markdown("""
         ---
-        We would like to hear from you 🌍 (https://docs.google.com/forms/d/1tfwe6-jLgr3MlXt0onkdV9aTG0EELhffVuRieWXWO4A/edit?usp=forms_home&ths=true)
+        🔗 We would like to hear from you (https://forms.gle/hWTy3pxmV7cAtWzYA)
         """)
 
 
